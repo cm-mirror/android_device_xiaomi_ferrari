@@ -58,9 +58,6 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
 # CPU
 TARGET_CPU_CORTEX_A53 := true
 
-# ANT+
-BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
-
 # Kernel
 BOARD_DTBTOOL_ARGS                 := -2
 BOARD_MKBOOTIMG_ARGS               := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
@@ -79,9 +76,6 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 else
 TARGET_KERNEL_CONFIG := cyanogenmod_ferrari_defconfig
-endif
-ifneq ($(TARGET_BUILD_VARIANT),user)
-TARGET_KERNEL_ADDITIONAL_CONFIG := cyanogenmod_debug_config
 endif
 
 # Audio
@@ -192,9 +186,6 @@ TARGET_RIL_VARIANT := caf
 ADD_RADIO_FILES := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-
-# SELinux
 BOARD_SEPOLICY_DIRS += \
     device/xiaomi/ferrari/sepolicy
 
@@ -224,6 +215,8 @@ WIFI_DRIVER_FW_PATH_STA          := "sta"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 TARGET_USES_QCOM_WCNSS_QMI       := true
 
+# include additional build utilities
+include device/qcom/common/utils.mk
 
 # inherit from the proprietary version
 -include vendor/xiaomi/ferrari/BoardConfigVendor.mk
